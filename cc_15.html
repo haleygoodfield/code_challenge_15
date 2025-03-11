@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risk Management Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+           font-family: aria, 'Times New Roman', Times, serif;
+           margin: 20px;
+           padding: 20px;
+           background-color:rgba(253, 227, 255, 0.834);
+       }
+       header, footer {
+           padding: 10px;
+           text-align: center;
+           margin: 10px;
+           border: 2px solid rgb(246, 184, 235);
+           background-color: rgb(255, 226, 250);
+           border-radius: 8px;
+           width: 620px;
+           display: block;
+       }
+       .riskCard {
+           margin: 20px;
+           padding: 20px;
+           border: 2px solid rgb(241, 162, 214);
+           background-color: rgb(244, 201, 229);
+           border-radius: 5px;
+           font-weight: bold;
+           width: 550px;
+       }
+       main {
+           cursor: pointer;
+           color: rgb(0, 0, 0);
+       }
+       </style>
 </head>
 <body>
     <header>
@@ -12,8 +43,9 @@
     </header>
 
     <main>
-        <form id = "inputForm" > <!--input form for adding new risk items-->
-        <button id="addRisk">Add Risk</button> <!--button to submit new risk assessments-->
+        <form id = "inputForm"> <!--input form for adding new risk items-->
+            <input type="text" id = "risk" placeholder="Risk" required>
+            <button id="addRisk">Add Risk</button> <!--button to submit new risk assessments-->
         <div id="riskDashboard"></div> <!--<div> with id="riskDashboard" to contain all risk items-->
     </main>
 
