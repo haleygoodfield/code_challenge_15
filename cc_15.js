@@ -31,14 +31,27 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     const departmentParagraph = document.createElement("p"); // // adds department to risk card
     departmentParagraph.textContent = `Department: ${department}`;
 
-    // assigns a class "riskCard" to each card
-    riskCard.appendChild(nameHeading);
-    riskCard.appendChild(levelParagraph);
-    riskCard.appendChild(departmentParagraph);
+    // Task 3: Removing Risk Items
+    const resolveButton = document.createElement("button"); // modifing addRiskItem to include a "Resolve" button
+    resolveButton.textContent = "Resolve";
+    resolveButton.classList.add("resolve-button");
+    resolveButton.addEventListener("click", function () { // buttom to click to remove card
+        ticketContainer.removeChild(riskCard); // removes the corresponding risk card 
+    });
+
+    // assigning a class "riskCard" to each card
+    riskCard.appendChild(nameHeading); // adds risk name to the card
+    riskCard.appendChild(levelParagraph); // adds the risk level to the card
+    riskCard.appendChild(departmentParagraph); // adds the department to the card
+    riskCard.appendChild(resolveButton); // adds the resolve button to the card
 
     riskDashboard.appendChild(riskCard); // appends it to the riskDashboard
 }
 
 // Test Cases
+// Task 2:
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
+// Task 3
+addRiskItem("Market Fluctuations", "High", "Finance"); // clicking "Resolve" will remove risk from dashboard
+
