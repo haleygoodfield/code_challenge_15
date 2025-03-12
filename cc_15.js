@@ -22,6 +22,15 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     const riskCard = document.createElement("div"); // creates a new risk card (div)
     riskCard.classList.add("riskCard"); 
 
+    // Task 4: modifying addRiskItem to apply different background colors based on risk level
+    if (riskLevel === "Low") {
+        riskCard.classList.add("lowRisk"); // assigned if risk is Low
+    } else if (riskLevel === "Medium") {
+        riskCard.classList.add("mediumRisk"); // assigned if risk is Medium
+    } else if (riskLevel === "High") {
+        riskCard.classList.add("highRisk"); // assigned if risk is High
+    }
+
     const nameHeading = document.createElement("h3"); // adds risk name to risk card
     nameHeading.textContent = `Risk Name: ${riskName}`;
 
@@ -46,6 +55,21 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     riskCard.appendChild(resolveButton); // adds the resolve button to the card
 
     riskDashboard.appendChild(riskCard); // appends it to the riskDashboard
+
+    highlightRiskItems(); 
+}
+
+// Task 4: Categorizing Risks by Level
+function highlightRiskItems() { //applying different colors based on risk level
+    document.querySelectorAll(".highRisk").forEach(item => {
+        item.style.backgroundColor = "rgb(252, 177, 177)"; // applies red for high risk 
+    });
+    document.querySelectorAll(".mediumRisk").forEach(item => {
+        item.style.backgroundColor = "rgb(249, 251, 198)"; // applies yellow for medium risk
+    });
+    document.querySelectorAll(".lowRisk").forEach(item => {
+        item.style.backgroundColor = "rgb(205, 243, 207)"; // // applies green for low risk
+    });
 }
 
 // Test Cases
@@ -54,4 +78,7 @@ addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
 // Task 3
 addRiskItem("Market Fluctuations", "High", "Finance"); // clicking "Resolve" will remove risk from dashboard
+// Task 4: 
+addRiskItem("Cybersecurity Threat", "High", "IT"); // appears in red
+addRiskItem("HR Compliance Issue", "Low", "Human Resources"); // appears in green
 
