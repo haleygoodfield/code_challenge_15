@@ -36,7 +36,7 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     resolveButton.textContent = "Resolve";
     resolveButton.classList.add("resolve-button");
     resolveButton.addEventListener("click", function () { // buttom to click to remove card
-        ticketContainer.removeChild(riskCard); // removes the corresponding risk card 
+        riskDashboard.removeChild(riskCard); // removes the corresponding risk card 
     });
 
     // assigning a class "riskCard" to each card
