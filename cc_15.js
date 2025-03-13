@@ -50,7 +50,7 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     resolveButton.textContent = "Resolve";
     resolveButton.classList.add("resolve-button");
     resolveButton.addEventListener("click", function (event) {  // buttom to click to remove card
-        event.stopPropagation(); // (Task 6) ensuring clicking inside a risk card does not trigger unwanted actions
+        event.stopPropagation(); // Task 6: using stopPropagation() so clicking inside a risk card wont trigger unwanted actions on dashboard
         riskDashboard.removeChild(riskCard); // removes the corresponding risk card 
         console.log(`${riskName} has been resolved`); // ensures risk card is being clicked
     });
@@ -100,15 +100,23 @@ function allIncrease() {
         highlightRiskItems(); // applies highlighting to cards
     });
 }
+// Task 6: Handling Event Propagation (done above)
 
 // Test Cases
+
 // Task 2:
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
+
 // Task 3
 addRiskItem("Market Fluctuations", "High", "Finance"); // clicking "Resolve" will remove risk from dashboard
+
 // Task 4: 
 addRiskItem("Cybersecurity Threat", "High", "IT"); // appears in red
 addRiskItem("HR Compliance Issue", "Low", "Human Resources"); // appears in green
+
 // Task 5:
 addRiskItem("Employee Retention", "Low", "HR"); // clicking "Increase Risk Levels" will change it to medium
+
+// Task 6: 
+// Click inside a risk card should not trigger a dashboard-wide event
