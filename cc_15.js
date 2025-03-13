@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
         addRiskItem(riskName, riskLevel, department); // adds new risk card with the details
         this.reset(); // clears form after submitting
     });
+
+    // Task 5
+    document.getElementById("allIncrease").addEventListener("click", allIncrease); // event listener for updating all risks at once
 });
 
 // Task 2: Adding Risk Items Dynamically
@@ -21,6 +24,7 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
 
     const riskCard = document.createElement("div"); // creates a new risk card (div)
     riskCard.classList.add("riskCard"); 
+    riskCard.setAttribute("storedLevel", riskLevel); // stores the risk level (Task 5)
 
     // Task 4: modifying addRiskItem to apply different background colors based on risk level
     if (riskLevel === "Low") {
@@ -36,6 +40,7 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
 
     const levelParagraph = document.createElement("p"); // // adds risk level to risk card
     levelParagraph.textContent = `Risk Level: ${riskLevel}`;
+    levelParagraph.classList.add("riskLevel"); // allow it to be selected for bulk updates (Task 5)
 
     const departmentParagraph = document.createElement("p"); // // adds department to risk card
     departmentParagraph.textContent = `Department: ${department}`;
@@ -44,8 +49,10 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     const resolveButton = document.createElement("button"); // modifing addRiskItem to include a "Resolve" button
     resolveButton.textContent = "Resolve";
     resolveButton.classList.add("resolve-button");
-    resolveButton.addEventListener("click", function () { // buttom to click to remove card
+    resolveButton.addEventListener("click", function (event) {  // buttom to click to remove card
+        event.stopPropagation(); // (Task 6) ensuring clicking inside a risk card does not trigger unwanted actions
         riskDashboard.removeChild(riskCard); // removes the corresponding risk card 
+        console.log(`${riskName} has been resolved`); // ensures risk card is being clicked
     });
 
     // assigning a class "riskCard" to each card
@@ -56,7 +63,7 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
 
     riskDashboard.appendChild(riskCard); // appends it to the riskDashboard
 
-    highlightRiskItems(); 
+    highlightRiskItems(); // applies highlighting to cards
 }
 
 // Task 4: Categorizing Risks by Level
@@ -72,6 +79,28 @@ function highlightRiskItems() { //applying different colors based on risk level
     });
 }
 
+// Task 5: Implementing Bulk Updates
+function allIncrease() {
+    document.querySelectorAll(".riskCard").forEach(riskCard => {
+        const levelParagraph = riskCard.querySelector(".riskLevel"); // selects the risk level
+        let initialLevel = riskCard.getAttribute("storedLevel");
+
+        if(initialLevel === "Low") { // changes low cards to high
+            riskCard.setAttribute("storedLevel", "Medium");
+            levelParagraph.textContent = "Risk Level: Medium";
+            riskCard.classList.remove("lowRisk"); // removes low risk
+            riskCard.classList.add("mediumRisk"); // adds medium risk
+        } else if 
+            (initialLevel === "Medium") { // changes medium cards to high
+            riskCard.setAttribute("storedLevel", "High");
+            levelParagraph.textContent = "Risk Level: High";
+            riskCard.classList.remove("mediumRisk"); // removes medium risk
+            riskCard.classList.add("highRisk"); // adds high risk
+        }
+        highlightRiskItems(); // applies highlighting to cards
+    });
+}
+
 // Test Cases
 // Task 2:
 addRiskItem("Data Breach", "High", "IT");
@@ -81,4 +110,5 @@ addRiskItem("Market Fluctuations", "High", "Finance"); // clicking "Resolve" wil
 // Task 4: 
 addRiskItem("Cybersecurity Threat", "High", "IT"); // appears in red
 addRiskItem("HR Compliance Issue", "Low", "Human Resources"); // appears in green
-
+// Task 5:
+addRiskItem("Employee Retention", "Low", "HR"); // clicking "Increase Risk Levels" will change it to medium
