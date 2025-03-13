@@ -62,7 +62,7 @@ function addRiskItem(riskName, riskLevel, department) { // write a function addR
     riskCard.appendChild(resolveButton); // adds the resolve button to the card
 
     riskDashboard.appendChild(riskCard); // appends it to the riskDashboard
-
+    
     highlightRiskItems(); // applies highlighting to cards
 }
 
